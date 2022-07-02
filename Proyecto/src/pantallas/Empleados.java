@@ -79,8 +79,7 @@ public class Empleados extends JFrame {
 		panel.add(textField_nombre);
 
 		JComboBox<String> comboBox = new JComboBox<String>();
-		comboBox.setModel(
-				new DefaultComboBoxModel<String>(new String[] { "Mecanico", "RepectorPagador", "Administrador" }));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "Mecanico", "RepectorPagador", "Administrador" }));
 		comboBox.setBounds(124, 112, 122, 22);
 		panel.add(comboBox);
 
@@ -198,6 +197,7 @@ public class Empleados extends JFrame {
 		panel_1.add(lblNewLabel_2_1);
 
 		JComboBox<String> comboBox_buscar = new JComboBox<String>();
+		comboBox_buscar.setModel(new DefaultComboBoxModel<String>(new String[] { "Mecanico", "RepectorPagador", "Administrador" }));
 		comboBox_buscar.setBounds(354, 210, 122, 22);
 		panel_1.add(comboBox_buscar);
 
@@ -282,6 +282,17 @@ public class Empleados extends JFrame {
 		contentPane.add(Button_volver);
 
 		//Buttons ----------------------------------------
+		
+		Button_eliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Generales.Numeros(textField_id_buscar.getText())) {
+					memoria.Empleados.Delete(Integer.valueOf(textField_id_buscar.getText()));
+					memoria.Empleados.showList();
+				}
+			}
+		});
+		
+		
 		Button_cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login login = new Login(memoria);
@@ -300,7 +311,41 @@ public class Empleados extends JFrame {
 		
 		Button_modificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				String nombre= null;
+				String usuario = textField_usuario_busscar.getText();
+				String password = textField_password_buscar.getText();
+				
+				if(Generales.Caracteres(textField_nombre_buscar.getText())) {
+					nombre = textField_nombre_buscar.getText();
+				}
+				
+				int rol = Empleado.setRol(comboBox_buscar.getSelectedItem().toString());
+				
+				if(nombre != null) {
+					memoria.Empleados.buscado.nombre = nombre;
+					memoria.Empleados.buscado.rol = rol;
+					memoria.Empleados.buscado.usuario = usuario;
+					memoria.Empleados.buscado.password = password;
+					
+					memoria.Empleados.showList();
+					
+				}
+				
+				memoria.Empleados.Terminado();
+			}
+		});
+		
+		Button_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Generales.Numeros(textField_id_buscar.getText())) {
+					memoria.Empleados.Search(Integer.valueOf(textField_id_buscar.getText()));
+					if(memoria.Empleados.buscado !=null) {
+						textField_nombre_buscar.setText(memoria.Empleados.buscado.nombre);
+						textField_rol_buscar.setText(memoria.Empleados.buscado.getRol());
+						textField_usuario_busscar.setText(memoria.Empleados.buscado.usuario);
+						textField_password_buscar.setText(memoria.Empleados.buscado.password);
+					}
+				}
 			}
 		});
 

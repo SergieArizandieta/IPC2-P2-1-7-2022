@@ -1,11 +1,13 @@
 package Listas;
 
+import javax.swing.JOptionPane;
+
 import objetos.Empleado;
 
 public class Doble_Empleados {
 Nodo_Doble primero;
 int contador = 0;
-Nodo_Doble buscado;
+public Empleado buscado;
 
 	public Doble_Empleados() {
 		this.primero = null;
@@ -46,12 +48,14 @@ Nodo_Doble buscado;
 				if (actual == null) {
 					buscado = null;
 					System.out.println("No se encontro el dato: " + data);
+					JOptionPane.showMessageDialog(null, "No se encontro la empleado!");
 					break;
 				}
 			}
 			if (actual != null && actual.info == data) {
-				buscado = actual;
+				buscado = actual.empleado;
 				System.out.println("Dato encontrado: " + data);
+				JOptionPane.showMessageDialog(null, "Se encontro al empleado!");
 			}
 		}
 	}
@@ -66,19 +70,27 @@ Nodo_Doble buscado;
 			
 			if  (actual == null) {
 				System.out.println("No se encontro el dato a eliminar: " + data);
+				JOptionPane.showMessageDialog(null, "No se encontro el empleado a eliminar!");
 			}else {
 				
 				if (actual.previous == null) {
 					this.primero = actual.next;
 					System.out.println("Se elimino el dato: " + data);
+					JOptionPane.showMessageDialog(null, "Se elimino al empleado!");
 				} else if (actual != null) {
 					actual.previous.next = actual.next;
 					actual.next = null;
 					System.out.println("Se elimino el dato: " + data);
+					JOptionPane.showMessageDialog(null, "Se elimino al empleado!");
 				}
 			}
 			 
 		}
+	}
+	
+	public void Terminado() {
+		buscado = null;
+		
 	}
 	
 	public Boolean isNone() {
@@ -90,7 +102,7 @@ class Nodo_Doble{
 	
 	Nodo_Doble next, previous;
 	int info;
-	Empleado empleado;
+	public Empleado empleado;
 	
 	public Nodo_Doble(int info,Empleado empleado) {
 		this.next =null;
