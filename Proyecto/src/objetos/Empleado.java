@@ -6,8 +6,7 @@ public class Empleado{
     public int rol;
     
     
-    public Empleado(int identificador , String nombre, String usuario, String password ,  int rol) {
-    	this.identificador = identificador;
+    public Empleado( String nombre, String usuario, String password ,  int rol) {
     	this.nombre = nombre;
     	this.usuario = usuario;
     	this.password = password;

@@ -11,6 +11,8 @@ import almacenamiento.memoria;
 import objetos.Cliente;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Client_Module extends JFrame {
 
@@ -32,5 +34,18 @@ public class Client_Module extends JFrame {
 		JLabel lblNewLabel = new JLabel(cliente.nombre + " zzzz");
 		lblNewLabel.setBounds(152, 71, 46, 14);
 		contentPane.add(lblNewLabel);
+		
+		JButton button_cerrarS = new JButton("Cerrar Sesi\u00F3n");
+		button_cerrarS.setBounds(283, 11, 141, 23);
+		contentPane.add(button_cerrarS);
+		
+		//Butons--------------------------------------------------------------------------------------
+				button_cerrarS.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Login login = new Login(memoria);
+						dispose();
+						login.setVisible(true);
+					}
+				});
 	}
 }
