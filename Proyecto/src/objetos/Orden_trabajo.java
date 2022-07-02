@@ -1,13 +1,13 @@
 package objetos;
 
-public class orden_pago{
+public class Orden_trabajo{
     public int noOrden;
-    public automovil auto;
-    public cliente cliente;
+    public Automovil auto;
+    public Cliente cliente;
     public String fecha;
     public int estado;
     
-    public orden_pago(int noOrden,automovil auto,cliente cliente,String fecha,int estado) {
+    public Orden_trabajo(int noOrden,Automovil auto,Cliente cliente,String fecha,int estado) {
     	this.noOrden =noOrden;
     	this.auto =auto;
     	this.cliente =cliente;

@@ -1,13 +1,17 @@
 package objetos;
 
-public class empleado{
+public class Empleado{
     public int identificador;
     public String nombre,usuario,password;
     public int rol;
     
     
-    public empleado(int identificador , String nombre, String usuario, String password ,  int rol) {
-    	
+    public Empleado(int identificador , String nombre, String usuario, String password ,  int rol) {
+    	this.identificador = identificador;
+    	this.nombre = nombre;
+    	this.usuario = usuario;
+    	this.password = password;
+    	this.rol = rol;
     }
 
 
