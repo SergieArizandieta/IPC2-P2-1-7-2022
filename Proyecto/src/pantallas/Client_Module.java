@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import almacenamiento.memoria;
+import almacenamiento.Memoria;
 import objetos.Cliente;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,7 +19,7 @@ public class Client_Module extends JFrame {
 	private JPanel contentPane;
 
 
-	public Client_Module(memoria memoria,Cliente cliente) {
+	public Client_Module(Memoria memoria,Cliente cliente) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

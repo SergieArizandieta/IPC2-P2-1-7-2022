@@ -1,8 +1,10 @@
 package almacenamiento;
+import Listas.Doble_Empleados;
 import objetos.*;
 
-public class memoria {
+public class Memoria {
 	public Cliente  clientesesion;
+	public Doble_Empleados Empleados = new Doble_Empleados();
 	
 	public void incializar() {
 		Long id = Long.valueOf("3");

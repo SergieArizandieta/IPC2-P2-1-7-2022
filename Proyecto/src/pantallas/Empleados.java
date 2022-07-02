@@ -10,8 +10,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import Generales.Generales;
+import almacenamiento.Memoria;
+import objetos.Empleado;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
@@ -25,36 +32,17 @@ public class Empleados extends JFrame {
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField textField_nombre;
+	private JTextField textField_usuario;
+	private JTextField textField_password;
+	private JTextField textField_nombre_buscar;
+	private JTextField textField_usuario_busscar;
+	private JTextField textField_password_buscar;
+	private JTextField textField_id_buscar;
+	private JTextField textField_rol_buscar;
 	private JTextField textField_8;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Empleados frame = new Empleados();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Empleados() {
+	public Empleados(Memoria memoria) {
 
 		JFileChooser fc = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("*.TME", "TME");
@@ -62,7 +50,7 @@ public class Empleados extends JFrame {
 		fc.setCurrentDirectory(new File("./Test"));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1004, 533);
+		setBounds(100, 100, 1100, 533);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -85,14 +73,14 @@ public class Empleados extends JFrame {
 		lblNewLabel_1.setBounds(10, 87, 115, 14);
 		panel.add(lblNewLabel_1);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(124, 84, 306, 20);
-		panel.add(textField);
+		textField_nombre = new JTextField();
+		textField_nombre.setColumns(10);
+		textField_nombre.setBounds(124, 84, 306, 20);
+		panel.add(textField_nombre);
 
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setModel(
-				new DefaultComboBoxModel<String>(new String[] { "Mecanico", "ReceptorPagador", "Administrador" }));
+				new DefaultComboBoxModel<String>(new String[] { "Mecanico", "RepectorPagador", "Administrador" }));
 		comboBox.setBounds(124, 112, 122, 22);
 		panel.add(comboBox);
 
@@ -100,10 +88,10 @@ public class Empleados extends JFrame {
 		lblNewLabel_2.setBounds(81, 115, 36, 14);
 		panel.add(lblNewLabel_2);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(124, 144, 306, 20);
-		panel.add(textField_1);
+		textField_usuario = new JTextField();
+		textField_usuario.setColumns(10);
+		textField_usuario.setBounds(124, 144, 306, 20);
+		panel.add(textField_usuario);
 
 		JLabel lblNewLabel_3 = new JLabel("Usuario: ");
 		lblNewLabel_3.setBounds(64, 147, 61, 14);
@@ -113,10 +101,10 @@ public class Empleados extends JFrame {
 		lblNewLabel_4.setBounds(45, 187, 80, 14);
 		panel.add(lblNewLabel_4);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(124, 184, 306, 20);
-		panel.add(textField_2);
+		textField_password = new JTextField();
+		textField_password.setColumns(10);
+		textField_password.setBounds(124, 184, 306, 20);
+		panel.add(textField_password);
 
 		JButton Button_Ingresar = new JButton("Ingresar");
 		Button_Ingresar.setBounds(226, 234, 97, 23);
@@ -136,6 +124,62 @@ public class Empleados extends JFrame {
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 
+		// Butins ------------------------------------------------------
+		Button_Ingresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nombre= null;
+				String usuario = textField_usuario.getText();
+				String password = textField_password.getText();
+				
+				if(Generales.Caracteres(textField_nombre.getText())) {
+					nombre = textField_nombre.getText();
+				}
+				
+				int rol = Empleado.setRol(comboBox.getSelectedItem().toString());
+				
+				if(nombre != null) {
+					Empleado new_empleado = new Empleado(nombre, rol, usuario, password);
+					memoria.Empleados.insert(new_empleado);
+					memoria.Empleados.showList();
+				}
+				
+			}
+		});
+
+		btnSeleccionarArchivo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					if (fc.showOpenDialog(btnSeleccionarArchivo) == JFileChooser.APPROVE_OPTION) {
+
+						String ruta = fc.getSelectedFile().toString();
+						File txt = new File(ruta);
+						Scanner reader = new Scanner(txt);
+
+						while (reader.hasNextLine()) {
+
+							String[] datos = reader.nextLine().split("-");
+							int rol = Empleado.setRol(datos[1]);
+							Empleado new_empleado = new Empleado(datos[0], rol, datos[2], datos[3]);
+							// new_empleado.print();
+							memoria.Empleados.insert(new_empleado);
+
+						}
+
+						memoria.Empleados.showList();
+
+					} else {
+						JOptionPane.showMessageDialog(null, "Ocurrio un error en la lectura de los datos");
+
+					}
+
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "Ocurrio un error en la lectura de los datos");
+				}
+
+			}
+		});
+
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Modificar", null, panel_1, null);
 		panel_1.setLayout(null);
@@ -144,36 +188,36 @@ public class Empleados extends JFrame {
 		lblNewLabel_1_1.setBounds(10, 169, 115, 14);
 		panel_1.add(lblNewLabel_1_1);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(124, 166, 306, 20);
-		panel_1.add(textField_3);
+		textField_nombre_buscar = new JTextField();
+		textField_nombre_buscar.setColumns(10);
+		textField_nombre_buscar.setBounds(124, 166, 306, 20);
+		panel_1.add(textField_nombre_buscar);
 
 		JLabel lblNewLabel_2_1 = new JLabel("Rol: ");
 		lblNewLabel_2_1.setBounds(81, 214, 36, 14);
 		panel_1.add(lblNewLabel_2_1);
 
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
-		comboBox_1.setBounds(354, 210, 122, 22);
-		panel_1.add(comboBox_1);
+		JComboBox<String> comboBox_buscar = new JComboBox<String>();
+		comboBox_buscar.setBounds(354, 210, 122, 22);
+		panel_1.add(comboBox_buscar);
 
 		JLabel lblNewLabel_3_1 = new JLabel("Usuario: ");
 		lblNewLabel_3_1.setBounds(64, 268, 61, 14);
 		panel_1.add(lblNewLabel_3_1);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(124, 265, 306, 20);
-		panel_1.add(textField_4);
+		textField_usuario_busscar = new JTextField();
+		textField_usuario_busscar.setColumns(10);
+		textField_usuario_busscar.setBounds(124, 265, 306, 20);
+		panel_1.add(textField_usuario_busscar);
 
 		JLabel lblNewLabel_4_1 = new JLabel("Contrase\u00F1a:");
 		lblNewLabel_4_1.setBounds(45, 308, 80, 14);
 		panel_1.add(lblNewLabel_4_1);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(124, 305, 306, 20);
-		panel_1.add(textField_5);
+		textField_password_buscar = new JTextField();
+		textField_password_buscar.setColumns(10);
+		textField_password_buscar.setBounds(124, 305, 306, 20);
+		panel_1.add(textField_password_buscar);
 
 		JButton Button_modificar = new JButton("Modificar");
 		Button_modificar.setBounds(226, 354, 97, 23);
@@ -183,20 +227,20 @@ public class Empleados extends JFrame {
 		lblNewLabel_1_1_1.setBounds(10, 70, 132, 14);
 		panel_1.add(lblNewLabel_1_1_1);
 
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(135, 67, 306, 20);
-		panel_1.add(textField_6);
+		textField_id_buscar = new JTextField();
+		textField_id_buscar.setColumns(10);
+		textField_id_buscar.setBounds(135, 67, 306, 20);
+		panel_1.add(textField_id_buscar);
 
 		JButton Button_buscar = new JButton("Buscar");
 		Button_buscar.setBounds(467, 66, 97, 23);
 		panel_1.add(Button_buscar);
 
-		textField_7 = new JTextField();
-		textField_7.setEditable(false);
-		textField_7.setColumns(10);
-		textField_7.setBounds(124, 211, 122, 20);
-		panel_1.add(textField_7);
+		textField_rol_buscar = new JTextField();
+		textField_rol_buscar.setEditable(false);
+		textField_rol_buscar.setColumns(10);
+		textField_rol_buscar.setBounds(124, 211, 122, 20);
+		panel_1.add(textField_rol_buscar);
 
 		JLabel lblNewLabel_2_1_1 = new JLabel("Nuevo rol: ");
 		lblNewLabel_2_1_1.setBounds(274, 214, 97, 14);
@@ -208,7 +252,7 @@ public class Empleados extends JFrame {
 		panel_1.add(lblModificacin);
 
 		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_2, null);
+		tabbedPane.addTab("Eliminar", null, panel_2, null);
 		panel_2.setLayout(null);
 
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Identificador a eliminar:");
@@ -228,64 +272,34 @@ public class Empleados extends JFrame {
 		lblEliminacin.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblEliminacin.setBounds(422, 11, 186, 29);
 		panel_2.add(lblEliminacin);
+		
+		JButton Button_cerrar = new JButton("Cerrar Sesion");
+		Button_cerrar.setBounds(932, 13, 142, 23);
+		contentPane.add(Button_cerrar);
+		
+		JButton Button_volver = new JButton("Volver");
+		Button_volver.setBounds(977, 460, 97, 23);
+		contentPane.add(Button_volver);
 
-		// Butins ------------------------------------------------------
-		Button_Ingresar.addActionListener(new ActionListener() {
+		//Buttons ----------------------------------------
+		Button_cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Login login = new Login(memoria);
+				dispose();
+				login.setVisible(true);
 			}
 		});
-
-		btnSeleccionarArchivo.addActionListener(new ActionListener() {
+		
+		Button_volver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if (fc.showOpenDialog(Button_modificar) == JFileChooser.APPROVE_OPTION) {
-
-					String ruta = fc.getSelectedFile().toString();
-					File txt = new File(ruta);
-					String data="";
-					
-					try (Scanner reader = new Scanner(txt)) {
-						
-						while(reader.hasNextLine()) {
-							data += reader.nextLine()+"\n";
-						}
-						
-						String rows [] = data.split("\n");
-						int rowsAlumnos =rows.length;
-						
-						String columns[]=rows[0].split("-");
-						int columnsAlumnos=columns.length;
-						
-						
-						for(int i =0; i<rows.length;i++) {
-							
-							columns=rows[i].split("-");
-							
-							for(int j=0;j<columns.length;j++) {
-								
-								System.out.println(columns[j]);
-								
-							}	
-						}
-						
-
-					} catch (Exception e2) {
-						// TODO: handle exception
-						System.out.println("Fallo 2");
-					}
-
-				} else {
-					System.out.println("Fallo 1");
-
-				}
-				
+				Admin_Module admin = new Admin_Module(memoria);
+				dispose();
+				admin.setVisible(true);
 			}
 		});
-
+		
 		Button_modificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				
 
 			}
 		});

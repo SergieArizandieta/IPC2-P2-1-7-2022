@@ -6,7 +6,7 @@ public class Empleado{
     public int rol;
     
     
-    public Empleado( String nombre, String usuario, String password ,  int rol) {
+    public Empleado( String nombre,  int rol , String usuario, String password  ) {
     	this.nombre = nombre;
     	this.usuario = usuario;
     	this.password = password;
@@ -25,6 +25,22 @@ public class Empleado{
         
 		return null;
     }
-
+    
+    public static int setRol(String tipo) {
+    	tipo = tipo.toLowerCase();
+    	if(tipo.equals("mecanico")) {
+    		return 1;
+    	}else if(tipo.equals("administrador")) {
+    		return 2;
+    	}else if(tipo.equals("repectorpagador")) {
+    		return 3;
+    	}
+    	return 0;
+    }
+    
+    public void print() {
+    	System.out.println(this.nombre + " " + this.usuario +  " " + this.password + " " + getRol() + " " + this.identificador);
+		
+	}
 
 }

@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import almacenamiento.memoria;
+import almacenamiento.Memoria;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -16,7 +16,7 @@ public class Admin_Module extends JFrame {
 
 	private JPanel contentPane;
 
-	public Admin_Module(memoria memoria) {
+	public Admin_Module(Memoria memoria) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 821, 421);
 		contentPane = new JPanel();
@@ -44,7 +44,7 @@ public class Admin_Module extends JFrame {
 		
 		btnEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Empleados empleados = new Empleados();
+				Empleados empleados = new Empleados(memoria);
 				dispose();
 				empleados.setVisible(true);
 			}

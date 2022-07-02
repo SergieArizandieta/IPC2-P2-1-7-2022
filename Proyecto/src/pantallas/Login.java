@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import almacenamiento.memoria;
+import almacenamiento.Memoria;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,7 +40,7 @@ public class Login extends JFrame {
 	}*/
 
 
-	public Login(memoria memoria) {
+	public Login(Memoria memoria) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

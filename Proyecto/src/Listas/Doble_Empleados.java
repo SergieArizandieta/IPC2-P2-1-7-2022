@@ -13,11 +13,14 @@ Nodo_Doble buscado;
 	
 	public void insert(Empleado empleado) {
 		Nodo_Doble new_node = new Nodo_Doble(contador + 1,empleado);
+		empleado.identificador = contador +1;
+		
 		if (isNone()) {
+			contador++;
 			this.primero = new_node;
 		}else {
 			contador++;
-			empleado.identificador = contador;
+			
 			new_node.next = this.primero;
 			this.primero.previous = new_node;
 			this.primero = new_node;
@@ -29,6 +32,7 @@ Nodo_Doble buscado;
 			Nodo_Doble actual = this.primero;
 			while (actual != null) {
 				System.out.println(actual.info);
+				actual.empleado.print();
 				actual = actual.next;
 			}
 		}

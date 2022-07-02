@@ -2,11 +2,11 @@ package main;
 
 import java.awt.EventQueue;
 
-import almacenamiento.memoria;
+import almacenamiento.Memoria;
 import pantallas.Login;
 
 public class main {
-	static memoria memoria = new memoria();
+	static Memoria memoria = new Memoria();
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
