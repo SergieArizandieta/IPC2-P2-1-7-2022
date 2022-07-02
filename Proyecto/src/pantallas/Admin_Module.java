@@ -37,6 +37,28 @@ public class Admin_Module extends JFrame {
 		btnRepuestos.setBounds(223, 62, 127, 23);
 		contentPane.add(btnRepuestos);
 		
+		JButton btnServicios = new JButton("Servicios");
+		btnServicios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Servicios servicio = new Servicios(memoria);
+				dispose();
+				servicio.setVisible(true);
+			}
+		});
+		btnServicios.setBounds(27, 140, 127, 23);
+		contentPane.add(btnServicios);
+		
+		JButton btnClientes = new JButton("Clientes");
+		btnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Clientes clientes = new Clientes(memoria);
+				dispose();
+				clientes.setVisible(true);
+			}
+		});
+		btnClientes.setBounds(223, 140, 127, 23);
+		contentPane.add(btnClientes);
+		
 		
 		//Butons--------------------------------------------------------------------------------------
 		button_cerrarS.addActionListener(new ActionListener() {

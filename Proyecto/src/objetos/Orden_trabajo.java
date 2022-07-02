@@ -7,12 +7,18 @@ public class Orden_trabajo{
     public String fecha;
     public int estado;
     
-    public Orden_trabajo(int noOrden,Automovil auto,Cliente cliente,String fecha,int estado) {
+    public Orden_trabajo(Automovil auto,Cliente cliente,String fecha,int estado) {
     	this.noOrden =noOrden;
     	this.auto =auto;
     	this.cliente =cliente;
     	this.fecha =fecha;
     	this.estado =estado;
     }
+    
+    public void print() {
+    	System.out.println(this.auto + " " + this.cliente + " " + this.fecha + " " + this.estado);
+    	
+		
+	}
 
 }

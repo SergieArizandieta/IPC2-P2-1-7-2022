@@ -12,9 +12,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Generales.Generales;
+import Listas.Pila_Repuestos_Servicio;
 import almacenamiento.Memoria;
 import objetos.Empleado;
 import objetos.Repuesto;
+import objetos.Servicio;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -26,10 +28,11 @@ import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
-public class Repuestos extends JFrame {
+public class Servicios extends JFrame {
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
@@ -45,10 +48,10 @@ public class Repuestos extends JFrame {
 	private JTextField textField_marca_busqueda;
 	private JTextField textfiel_nombre_busqueda;
 
-	public Repuestos(Memoria memoria) {
+	public Servicios(Memoria memoria) {
 
 		JFileChooser fc = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("*.TMR", "TMR");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("*.TMS", "TMS");
 		fc.setFileFilter(filter);
 		fc.setCurrentDirectory(new File("./Test"));
 
@@ -72,7 +75,7 @@ public class Repuestos extends JFrame {
 		lblManual.setBounds(10, 38, 186, 29);
 		panel.add(lblManual);
 
-		JLabel lblNewLabel_1 = new JLabel("Nombre repuesto: ");
+		JLabel lblNewLabel_1 = new JLabel("Nombre Servicio");
 		lblNewLabel_1.setBounds(10, 87, 115, 14);
 		panel.add(lblNewLabel_1);
 
@@ -103,7 +106,7 @@ public class Repuestos extends JFrame {
 		btnSeleccionarArchivo.setBounds(10, 384, 186, 23);
 		panel.add(btnSeleccionarArchivo);
 
-		JLabel lblNewLabel = new JLabel("Registro Repuesto");
+		JLabel lblNewLabel = new JLabel("Registro Servicio");
 		lblNewLabel.setBounds(353, 11, 186, 29);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -117,7 +120,7 @@ public class Repuestos extends JFrame {
 		textField_modelo.setBounds(124, 153, 306, 20);
 		panel.add(textField_modelo);
 		
-		JLabel lblNewLabel_3_2_1 = new JLabel("Existencias:");
+		JLabel lblNewLabel_3_2_1 = new JLabel("Lista de");
 		lblNewLabel_3_2_1.setBounds(53, 190, 61, 14);
 		panel.add(lblNewLabel_3_2_1);
 		
@@ -173,13 +176,25 @@ public class Repuestos extends JFrame {
 
 							String[] datos = reader.nextLine().split("-");
 							
-							Repuesto new_repuesto = new Repuesto(datos[0], datos[1], datos[2],Integer.valueOf( datos[3]) , Double.valueOf(datos[4]));
+							
+							String[] pila_datos = datos[3].split(";");
+							
+							Pila_Repuestos_Servicio pila = new Pila_Repuestos_Servicio() ;
+							
+							for (int i = 0; i < pila_datos.length; i++) {
+								//System.out.println(pila_datos[i]);
+								pila.insert(Integer.valueOf( pila_datos[i]));
+							}
+							
+							//pila.showList();
+							
+							Servicio new_servicio = new Servicio(datos[0], datos[1], datos[2], pila , Double.valueOf(datos[4]));
 							// new_empleado.print();
-							memoria.Repuesto.insert(new_repuesto);
+							memoria.Servicios.insert(new_servicio);
 
 						}
 
-						memoria.Repuesto.showList();
+						memoria.Servicios.showList();
 
 					} else {
 						JOptionPane.showMessageDialog(null, "Ocurrio un error en la lectura de los datos");
