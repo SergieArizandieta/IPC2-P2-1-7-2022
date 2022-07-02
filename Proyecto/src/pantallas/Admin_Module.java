@@ -32,13 +32,24 @@ public class Admin_Module extends JFrame {
 		button_cerrarS.setBounds(654, 11, 141, 23);
 		contentPane.add(button_cerrarS);
 		
+		JButton btnRepuestos = new JButton("Repuestos");
+		
+		btnRepuestos.setBounds(223, 62, 127, 23);
+		contentPane.add(btnRepuestos);
+		
 		
 		//Butons--------------------------------------------------------------------------------------
 		button_cerrarS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login login = new Login(memoria);
+				
+			}
+		});
+		
+		btnRepuestos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Repuestos repuestos = new Repuestos(memoria);
 				dispose();
-				login.setVisible(true);
+				repuestos.setVisible(true);
 			}
 		});
 		

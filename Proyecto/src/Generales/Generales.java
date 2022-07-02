@@ -26,4 +26,14 @@ public class Generales {
 			return false;
 		}
     }
+    
+    public static boolean Numeros_Dobles(String cadena) {
+    	try {
+			Double numero = Double.valueOf(cadena);
+			return true;
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Introducir solo numeros en los campos especificados");
+			return false;
+		}
+    }
 }

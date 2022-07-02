@@ -285,8 +285,8 @@ public class Empleados extends JFrame {
 		
 		Button_eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Generales.Numeros(textField_id_buscar.getText())) {
-					memoria.Empleados.Delete(Integer.valueOf(textField_id_buscar.getText()));
+				if(Generales.Numeros(textField_8.getText())) {
+					memoria.Empleados.Delete(Integer.valueOf(textField_8.getText()));
 					memoria.Empleados.showList();
 				}
 			}
