@@ -1,5 +1,12 @@
 package Listas;
 
+import java.io.FileOutputStream;
+
+import javax.swing.JComboBox;
+import javax.swing.text.Document;
+
+
+
 import objetos.Servicio;
 
 public class Simple {
@@ -33,21 +40,39 @@ public class Simple {
 			}
 		}
 	}
-
-	public void Search(int data) {
+	
+	public void ComboBox(JComboBox<String> comboBox) {
+		
+		
 		if (isNone() == false) {
 			Nodo_Simple actual = this.primero;
-			while (actual != null && actual.info != data) {
+			while (actual != null) {
+				comboBox.addItem(actual.servicio.nombre);
 				actual = actual.next;
-				if (actual == null) {
-					System.out.println("No se encontro el dato: " + data);
-					break;
-				}
-			}
-			if (actual != null && actual.info == data) {
-				System.out.println("Dato encontrado: " + data);
 			}
 		}
+		
+		comboBox.setBounds(620, 52, 338, 22);
+	
+		
+	}
+
+	public Servicio Search(String servicio) {
+		if (isNone() == false) {
+			Nodo_Simple actual = this.primero;
+			while (actual != null && !actual.servicio.nombre.toLowerCase().equals(servicio)) {
+				actual = actual.next;
+				if (actual == null) {
+					System.out.println("No se encontro el dato: " + servicio);
+					return null;
+				}
+			}
+			if (actual != null &&actual.servicio.nombre.toLowerCase().equals(servicio)) {
+				System.out.println("Dato encontrado: " + servicio);
+				return actual.servicio;
+			}
+		}
+		return null;
 	}
 
 	public void Delete(int data) {
@@ -76,6 +101,12 @@ public class Simple {
 	public Boolean isNone() {
 		return this.primero == null;
 	}
+	 
+	public void pdf() {
+
+		 
+	}
+     
 }
 
 class Nodo_Simple {

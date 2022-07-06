@@ -4,6 +4,7 @@ public class Repuesto{
     public int identificador,existencias,existencia;
     public String nombre,marca,modelo;
     public double precio;
+    public int usado;
     
     public Repuesto( String nombre , String marca , String modelo,int  existencias ,   double precio) {
     	this.nombre = nombre;
@@ -14,7 +15,7 @@ public class Repuesto{
     }
     
     public void print() {
-    	System.out.println(this.nombre + " " + this.marca +  " " + this.modelo + " " + this.existencias + " " + this.precio);
+    	System.out.println(this.nombre + " " + this.marca +  " " + this.modelo + " existencia:" + this.existencias + " precio:" + this.precio);
 		
 	}
     

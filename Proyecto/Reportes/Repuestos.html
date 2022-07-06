@@ -1,0 +1,78 @@
+<!DOCTYPE html><!--Declarar el tipo de cumento -->
+<html>
+
+<!--Encabezado-->
+<head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8"><!--codififcaion de caracteres � y �-->
+
+
+<meta name="name" content="Reporte"><!--nombre de la pagina-->
+<meta name="description" content="name"><!--autor de la pagina-->
+<meta name="keywods" content="uno,dos,tres"><!--Palabras claavez para, separadas por comas-->
+<meta name="robots" content="Index, Follow"><!--Mejora la busqueda-->
+<meta name="viewport" content="width=device-width, initial-scale=1"><!--visibilidaad en diferentes pantallas -->
+
+
+<link rel="stylesheet" type="text/css" href="css/styles.css"/><!--css /estilo/tipo/ruta relativa -->
+
+<title>Reporte</title><!--Titulo visible de la pagina-->
+</head>
+
+<body>
+
+<center><!--centra todos lo que este dentro-->
+
+<!----tabla 1-->
+<h6 class="titulos"><b> Reporte Alumnado </b></h6>
+<h1>Clientes normales</h1> <!----tabla 2-->
+<table class="steelBlueCols">
+<thead>
+   <tr> <th>Nombre</th> <th>Marca</th> <th> Modelo</th> <th> Existencia</th> <th> precio</th></tr>
+</thead>
+<tbody>
+
+<tr><td>Amortiguador adelante piloto</td><td>bmw</td><td>323 2015</td><td>0</td><td>1250.0</td></tr> 
+ <tr><td>Amortiguador adelante copiloto</td><td>bmw</td><td>323 2015</td><td>0</td><td>1250.0</td></tr> 
+ <tr><td>Aceite full sintético</td><td>cualquiera</td><td>cualquiera</td><td>0</td><td>600.0</td></tr> 
+ <tr><td>Pistón</td><td>honda</td><td>civic 2005</td><td>0</td><td>250.5</td></tr> 
+ <tr><td>Filtro aceite</td><td>honda</td><td>civic 2005</td><td>0</td><td>70.0</td></tr> 
+ <tr><td>Filtro aire</td><td>honda</td><td>civic 2005</td><td>0</td><td>60.0</td></tr> 
+ <tr></tr></tbody></table> <br><br>
+ <br> <div>
+  <canvas id="myChart"></canvas>
+</div> <script>
+  const labels = [
+"Amortiguador adelante piloto",
+"Amortiguador adelante copiloto",
+"Aceite full sintético",
+"Pistón",
+"Filtro aceite",
+"Filtro aire",
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Grafico',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [1250.0,1250.0,600.0,250.5,70.0,60.0,],
+    }]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {}
+  };
+</script> <script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
+</center>
+
+</body>
+</html>  

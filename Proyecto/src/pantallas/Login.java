@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
-	String passwordAdmin = "1", userAdmin = "1";
+	String passwordAdmin = "admin", userAdmin = "admin";
 
 	private JPanel contentPane;
 	private JTextField UserText;
@@ -101,13 +101,11 @@ public class Login extends JFrame {
 						
 						dispose();
 
-					}else if (/*storage.SerchClient(User,password)*/ true) {
-						//JOptionPane.showMessageDialog(null, "Client joined");
+					}else if (memoria.sesion(User,password) != null) {
 						
 						
 						Client_Module frame = new Client_Module(memoria,memoria.clientesesion);
 						frame.setVisible(true);
-						
 						dispose();
 						
 						

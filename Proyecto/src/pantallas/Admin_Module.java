@@ -59,11 +59,23 @@ public class Admin_Module extends JFrame {
 		btnClientes.setBounds(223, 140, 127, 23);
 		contentPane.add(btnClientes);
 		
+		JButton btnReportes = new JButton("Reportes");
+		btnReportes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Reportes reporte = new Reportes(memoria);
+				reporte.setVisible(true);
+			}
+		});
+		btnReportes.setBounds(133, 231, 127, 23);
+		contentPane.add(btnReportes);
+		
 		
 		//Butons--------------------------------------------------------------------------------------
 		button_cerrarS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Login login = new Login(memoria);
+				dispose();
+				login.setVisible(true);
 			}
 		});
 		

@@ -2,6 +2,7 @@ package Listas;
 
 import javax.swing.JOptionPane;
 
+import almacenamiento.Memoria;
 import objetos.Empleado;
 import objetos.Repuesto;
 
@@ -36,6 +37,21 @@ int contador = 0;
 				actual = actual.next;
 			}
 		}
+	}
+	
+	public Double recorrer(Memoria memoria) {
+		Double precio = 0.0;
+		if (isNone() == false) {
+			Nodo_Pila actual = this.primero;
+			while (actual != null) {
+				precio += memoria.Repuesto.Search(actual.repuesto);
+				actual = actual.next;
+			}
+		}
+		System.out.println("PRecio total repuestos");
+		System.out.println(precio);
+		
+		return precio;
 	}
 
 	

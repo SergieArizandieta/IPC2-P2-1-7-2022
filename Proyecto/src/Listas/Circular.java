@@ -3,6 +3,7 @@ package Listas;
 import objetos.Automovil;
 
 public class Circular {
+	int contador = 0;
 	Nodo_Circular primero;
 
 	public Circular() {
@@ -13,8 +14,10 @@ public class Circular {
 		Nodo_Circular new_node = new Nodo_Circular(auto.placa,auto);
 
 		if (isNone()) {
+			contador++;
 			this.primero = new_node;
 		} else {
+			contador++;
 			new_node.next = this.primero.next;
 			this.primero.next = new_node;
 		}
@@ -33,7 +36,30 @@ public class Circular {
 
 	}
 	
-	public void Search(String data) {
+	public Object[][] data(){
+		Object[][] data = new Object[contador][4];
+		Nodo_Circular actual = this.primero;
+		
+		
+		if (isNone() == false) {
+			int i=0;
+			do {
+				data[i][0]=actual.auto.placa;
+				data[i][1]=actual.auto.marca;
+				data[i][2]=actual.auto.modelo;
+				data[i][3]=actual.auto.img;
+				
+				actual = actual.next;
+				i++;
+			} while (actual != this.primero);
+			
+		}
+		
+		
+		return data;
+	}
+	
+	public Automovil Search(String data) {
 		
 		if (isNone() == false) {
 			Nodo_Circular actual = this.primero;
@@ -42,7 +68,7 @@ public class Circular {
 				if (actual.info.equals(data)) {
 					System.out.println("Dato encontrado: " + data);
 					Encontrado = false;
-					break;
+					return actual.auto;
 				}else {
 					actual = actual.next;
 				}
@@ -50,9 +76,11 @@ public class Circular {
 			
 			if(Encontrado) {
 				System.out.println("No se encontro el dato: " + data);
+				return null;
 			}
 			
 		}
+		return null;
 	}
 	
 	public void Delete(String data) {

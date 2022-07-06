@@ -100,7 +100,7 @@ public class Clientes extends JFrame {
 							
 				
 							
-							Cliente new_cliente = new Cliente(Long.valueOf( datos[0]) , datos[1], datos[2], datos[3] ,datos[4]);
+							
 							
 							String[] Autos = datos[5].split(";");
 							
@@ -111,9 +111,10 @@ public class Clientes extends JFrame {
 								Automovil auto= new Automovil(datos_auto[0],datos_auto[1],datos_auto[2],datos_auto[3]);
 								autos.insert(auto);
 							}
-							//autos.showList();
+							//autos.showList()
+							Cliente new_cliente = new Cliente(Long.valueOf( datos[0]) , datos[1], datos[2], datos[3] ,datos[4],autos);
 							
-							memoria.Clientes.insert(new_cliente,autos);
+							memoria.Clientes.insert(new_cliente);
 							// new_empleado.print();
 							//memoria.Servicios.insert(new_servicio);
 							
@@ -217,6 +218,10 @@ public class Clientes extends JFrame {
 		
 		Button_eliminar_1.setBounds(434, 193, 97, 23);
 		panel_2.add(Button_eliminar_1);
+		
+		JPanel panel_3 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_3, null);
+		panel_3.setLayout(null);
 		
 		JButton Button_cerrar = new JButton("Cerrar Sesion");
 		Button_cerrar.setBounds(932, 13, 142, 23);

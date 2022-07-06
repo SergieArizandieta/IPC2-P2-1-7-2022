@@ -4,7 +4,7 @@ public class Empleado{
     public int identificador;
     public String nombre,usuario,password;
     public int rol;
-    
+    public boolean ocupado = false;
     
     public Empleado( String nombre,  int rol , String usuario, String password  ) {
     	this.nombre = nombre;

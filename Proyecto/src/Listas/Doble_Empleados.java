@@ -60,6 +60,29 @@ public Empleado buscado;
 		}
 	}
 	
+	public Empleado Search_mecanicovacio() {
+		if (isNone() == false) {
+			Nodo_Doble actual = this.primero;
+			while (actual != null) {
+				
+				if(actual.empleado.rol == 1) {
+					if(!actual.empleado.ocupado) {
+						actual.empleado.ocupado = true;
+						return actual.empleado;
+					}
+				}
+				
+				actual = actual.next;
+				
+				if (actual == null) {
+					buscado = null;
+					break;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public void Delete(int data) {
 		if (isNone() == false) {
 			Nodo_Doble actual = this.primero;

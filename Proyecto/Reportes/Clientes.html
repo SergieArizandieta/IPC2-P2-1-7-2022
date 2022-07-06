@@ -1,0 +1,77 @@
+<!DOCTYPE html><!--Declarar el tipo de cumento -->
+<html>
+
+<!--Encabezado-->
+<head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8"><!--codififcaion de caracteres ñ y á-->
+
+
+<meta name="name" content="Reporte"><!--nombre de la pagina-->
+<meta name="description" content="name"><!--autor de la pagina-->
+<meta name="keywods" content="uno,dos,tres"><!--Palabras claavez para, separadas por comas-->
+<meta name="robots" content="Index, Follow"><!--Mejora la busqueda-->
+<meta name="viewport" content="width=device-width, initial-scale=1"><!--visibilidaad en diferentes pantallas -->
+
+
+<link rel="stylesheet" type="text/css" href="css/styles.css"/><!--css /estilo/tipo/ruta relativa -->
+
+<title>Reporte</title><!--Titulo visible de la pagina-->
+</head>
+
+<body>
+
+<center><!--centra todos lo que este dentro-->
+
+<!----tabla 1-->
+<h6 class="titulos"><b> Reporte Alumnado </b></h6>
+<h1>Clientes normales</h1> <!----tabla 2-->
+<table class="steelBlueCols">
+<thead>
+   <tr> <th>DPI</th> <th>Nombre</th> <th> Usuario</th> <th> Contraseña</th> </tr>
+</thead>
+<tbody>
+
+<tr><td>568</td><td>Roberto Lemux</td><td>ro</td><td>123</td></tr> 
+ <tr></tr></tbody></table> <br><br><h1>Clientes Oro</h1> <!----tabla 2-->
+<table class="steelBlueCols">
+<thead>
+   <tr> <th>DPI</th> <th>Nombre</th> <th> Usuario</th> <th> Contraseña</th> </tr>
+</thead>
+<tbody>
+
+<tr><td>123</td><td>Tedy Lopez</td><td>ted</td><td>123</td></tr> 
+ <tr></tr></tbody></table> <br><br>
+ <br> <div>
+  <canvas id="myChart"></canvas>
+</div> <script>
+  const labels = [
+    'Oro',
+    'Normales',
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Grafico',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [1 , 1],
+    }]
+  };
+
+  const config = {
+    type: 'pie',
+    data: data,
+    options: {}
+  };
+</script> <script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
+</center>
+
+</body>
+</html>  

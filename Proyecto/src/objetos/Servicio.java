@@ -7,6 +7,7 @@ public class Servicio{
     public String nombre,marca,modelo;
     public Pila_Repuestos_Servicio pila; 
     public double mano_obra;
+    public int usado;
     
     public Servicio ( String nombre,String marca,String modelo ,Pila_Repuestos_Servicio pila , double mano_obra) {
     	this.nombre = nombre;
